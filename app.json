@@ -3,9 +3,9 @@
     "name": "cda-23-app",
     "slug": "cda-23-app",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "automatic",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
