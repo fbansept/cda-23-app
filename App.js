@@ -8,14 +8,17 @@ export default function App() {
   const App = () => {
     const styles = AppStyles();
 
-    const { connecte, setConnecte } = useState(false);
+    const [ connecte, setConnecte ] = useState(false);
 
-    const onLogin = () => setConnecte(true);
+    const onLogin = () => {
+      console.log("test");
+      setConnecte(true);
+    };
 
-    const LoginNavigation = () => {
+    const LoginNavigation = ({ onLogin }) => {
       return (
         <View style={[styles.container, styles.safeArea]}>
-          <Button title="Se connecter" onPress={setConnecte(true)} />
+          <Button title="Se connecter" onPress={onLogin} />
         </View>
       );
     };
@@ -28,7 +31,7 @@ export default function App() {
       );
     };
 
-    return connecte ? <AppNavigation /> : <LoginNavigation />;
+    return connecte ? <AppNavigation /> : <LoginNavigation onLogin={onLogin} />;
   };
 
   return (
