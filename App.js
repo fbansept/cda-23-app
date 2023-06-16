@@ -24,7 +24,7 @@ export default function App() {
   const App = () => {
     const styles = AppStyles();
 
-    const [connecte, setConnecte] = useState(false);
+    const [connecte, setConnecte] = useState(true);
 
     const onLogin = () => {
       setConnecte(true);
@@ -73,8 +73,10 @@ export default function App() {
       );
     };
 
+    const [texteRecherche, setTexteRecherche] = useState("");
+
     const EnteteRecherche = ({ navigation }) => {
-      const [texteRecherche, setTexteRecherche] = useState("");
+      const [texte, setTexte] = useState("");
 
       return (
         <Header
@@ -83,9 +85,11 @@ export default function App() {
           }
           centerComponent={() => (
             <SearchBar
-              placeholder="Recherche..."
-              value={texteRecherche}
-              onChangeText={(texte) => setTexteRecherche(texte)}
+              placeholder="Recherche ..."
+              cancelButtonTitle=""
+              value={texte}
+              onChangeText={(texte) => setTexte(texte)}
+              onSubmitEditing={(texte) => setTexteRecherche(texte)}
               containerStyle={{
                 backgroundColor: "transparent",
                 borderTopWidth: 0,
@@ -93,11 +97,13 @@ export default function App() {
                 flex: 1,
                 width: "100%",
                 justifyContent: "center",
-                alignItems: "flex-start",
                 padding: 0,
                 margin: 0,
               }}
-              inputContainerStyle={{ backgroundColor: "transparent" }}
+              inputContainerStyle={{
+                backgroundColor: "transparent",
+                padding: 0,
+              }}
               inputStyle={{ color: "#000" }}
               placeholderTextColor="#555"
               searchIcon={{ color: "#555" }}
