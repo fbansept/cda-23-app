@@ -9,6 +9,7 @@ import { launchCameraAsync } from "expo-image-picker";
 import { Input, Button, CheckBox, Icon } from "react-native-elements";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Picker } from "@react-native-picker/picker";
+import { Controller, useForm } from "react-hook-form";
 
 export default () => {
   const styles = { ...AppStyles(), ...FormulaireDemandeStyles() };
@@ -17,6 +18,12 @@ export default () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [severity, setSeverity] = useState("faible");
   const [asap, setAsap] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => console.log(data);
 
@@ -56,32 +63,41 @@ export default () => {
   };
 
   return (
-    <View style={[styles.container, styles.centered, { padding: 5 }]}>
-      <TextInput
-        placeholder="Titre"
-        style={{
-          height: 40,
-          backgroundColor: "#fbfbfb",
-          marginBottom: 16,
-          paddingHorizontal: 8,
-          borderBottomWidth: 1,
-          width: "100%",
-          marginHorizontal: 8,
-        }}
-      ></TextInput>
-      <TextInput
-        placeholder="Description"
-        style={{
-          height: 150,
-          backgroundColor: "#fbfbfb",
-          marginBottom: 16,
-          paddingHorizontal: 8,
-          borderBottomWidth: 1,
-          width: "100%",
-          marginHorizontal: 8,
-        }}
-        multiline
-      ></TextInput>
+    <View style={[styles.container, { padding: 5 }]}>
+      <Controller
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Input
+            onBlur={onBlur}
+            onChangeText={(value) => onChange(value)}
+            value={value}
+            label="Titre"
+            errorStyle={{ color: "red" }}
+            errorMessage={errors.title ? "Ce champ est requis." : ""}
+          />
+        )}
+        name="title"
+        rules={{ required: true }}
+        defaultValue=""
+      />
+
+      <Controller
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Input
+            onBlur={onBlur}
+            onChangeText={(value) => onChange(value)}
+            value={value}
+            label="Description"
+            multiline
+            errorStyle={{ color: "red" }}
+            errorMessage={errors.description ? "Ce champ est requis." : ""}
+          />
+        )}
+        name="description"
+        rules={{ required: true }}
+        defaultValue=""
+      />
 
       <Text style={styles.label}>Sévérité</Text>
       <Picker
@@ -108,7 +124,7 @@ export default () => {
         onCancel={hideDatePicker}
       />
 
-      <Button title="Envoyer"/>
+      <Button title="Envoyer" />
 
       <TouchableOpacity onPress={onClicPhoto}>
         <Ionicons name="camera" size={24} color="#000" />
