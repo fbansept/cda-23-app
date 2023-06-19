@@ -41,41 +41,18 @@ export default ({ navigation }) => {
         data={demandes}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={{
-              backgroundColor: "#f2f2f2",
-              padding: 16,
-              marginBottom: 16,
-              borderRadius: 5,
-              flexDirection: "row", // Aligner l'image et le texte horizontalement
-              alignItems: "center", // Centrer verticalement l'image et le texte
-            }}
+            style={styles.listElement}
           >
             <Image
               source={{ uri: item.nomImage }}
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                marginRight: 16,
-              }}
+              style={styles.roundImage}
             />
             <Text>{item.titre}</Text>
           </TouchableOpacity>
         )}
       ></FlatList>
       <TouchableOpacity
-        style={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
-          width: 56,
-          height: 56,
-          borderRadius: 28,
-          backgroundColor: "#007BFF",
-          alignItems: "center",
-          justifyContent: "center",
-          elevation: 4,
-        }}
+        style={styles.fab}
         onPress={onAjoutDemande}
       >
         <Icon name="add" size={24} color="#fff"></Icon>

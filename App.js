@@ -76,7 +76,8 @@ export default function App() {
     const [texteRecherche, setTexteRecherche] = useState("");
 
     const EnteteRecherche = ({ navigation }) => {
-      const [texte, setTexte] = useState("");
+
+      const [texte, setTexte] = useState(texteRecherche);
 
       return (
         <Header
@@ -89,7 +90,9 @@ export default function App() {
               cancelButtonTitle=""
               value={texte}
               onChangeText={(texte) => setTexte(texte)}
-              onSubmitEditing={(texte) => setTexteRecherche(texte)}
+              onSubmitEditing={(event) =>
+                setTexteRecherche(event.nativeEvent.text)
+              }
               containerStyle={{
                 backgroundColor: "transparent",
                 borderTopWidth: 0,

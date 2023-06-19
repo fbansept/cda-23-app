@@ -6,6 +6,7 @@ export const colors = {
   warn: "#A7373F",
   white: "#fff",
   black: "#000",
+  grey: "#f2f2f2"
 };
 
 export const colorsTheme = {
